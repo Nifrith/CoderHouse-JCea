@@ -17,7 +17,7 @@ Configurar el movimiento de un objeto en una dirección determinada y escalar el
     - Vector3 scale
     - float moveSpeed
 - Se aumenta la escala del objeto al iniciar el juego (darle Play) en el método Start, utilizando la llamada al metodo ScaleObject() que modifica el localScale.
-- Se realiza el movimiento del objeto en cada frame, llamando al método Move(), que recibe una variable parámetro de entrada tipo Vector3, que permite el movimiento del objeto en todas direcciones según los valores ingresados
+- Se realiza el movimiento del objeto en cada frame, llamando al método Move(), que recibe una variable parámetro de entrada tipo Vector3, que permite el movimiento del objeto en todas direcciones según los valores ingresados, multiplicados por la velocidad de movimiento (moveSpeed) y Time.deltaTime para un movimiento fluido.
 ## Autor
 
 - [@Josue Cea](https://www.github.com/Nifrith)
