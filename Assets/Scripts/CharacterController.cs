@@ -38,7 +38,7 @@ public class CharacterController : MonoBehaviour
 
     // Cube moves towards wanted position using a vector3, so it can move in all directions
     void Move(){
-        transform.position += (movement * moveSpeed * Time.deltaTime);
+        transform.position += (direction * moveSpeed * Time.deltaTime);
     }
 
 
