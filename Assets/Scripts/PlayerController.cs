@@ -9,15 +9,15 @@ public class PlayerController : MonoBehaviour
 
     /* As we don't need call this variables with another scripts, i made them
      private but Serialized, to change them on editor */
-    [SerializeField] private Vector3 movement;
-    [SerializeField] private Vector3 scale;
+    [SerializeField] private Vector3 direction;
+    [SerializeField] private Vector3 toBeScaled;
 
     // I added a moveSpeed variable to control how fast object moves
     [SerializeField] private float moveSpeed;
 
     // On Start method, i set the new localScale of the object
     void Start() { 
-        ScaleObject(scale);
+        ScaleObject(toBeScaled);
     }
 
     // Update is called once per frame
