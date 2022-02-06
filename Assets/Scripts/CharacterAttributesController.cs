@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -12,7 +13,7 @@ public class CharacterAttributesController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        Debug.Log("Health is: "+ health);
     }
 
     // Update is called once per frame
@@ -56,8 +57,13 @@ public class CharacterAttributesController : MonoBehaviour
         }
         else
         {
+            float lowHealth = maxHealth * 0.20f; 
             health -= damage;
             Debug.Log("Damage taken, life now is: " + health);
+            if (health <= lowHealth)
+            {
+                Debug.Log("Caution, low Health");
+            }
         }
 
 
