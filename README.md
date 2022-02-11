@@ -1,25 +1,53 @@
 # Josue-Cea_Desafío 2 [![Unity](https://img.shields.io/badge/Unity-100000?style=for-the-badge&logo=unity&logoColor=white)](https://unity.com/es)
 
-Segunda consigna curso coderhouse: Desarrollo de videojuegos, clase Debugging y funciones propias , Primera implementación de mecánica
+Tercera consigna curso coderhouse: Desarrollo de videojuegos, clase Modificación de GameObjects: Prefabs , Instanciación de balas
 
 ## Consigna
 
-Crear un script que contenga las variables: vida, velocidad, dirección, Se deberá crear además un método que controle movimiento, otro que cure al jugador y otro método que dañe al jugador.
-
+Crear prefab de bala con variables expuestas speed, direction y damage. La bala debe moverse en la dirección establecida en la variable direction, a la velocidad establecida en la variable speed.
+Se debe crear además un script Cannon() conteniendo el método Disparo, para así poder realizar el instanciamiento
 ## Desarrollo de actividad
 
-- Debido a que las variables no serán accedidas por ningún otro script, las cree privadas pero serializadas, de esta manera se pueden configurar en el editor
-- Preferí crear dos scripts diferentes para trabajar diferentes aspectos de la lógica
-    - CharacterController.cs : Contiene la lógica de movimiento y dirección del personaje
-    - CharacterAttributesController.cs: Contiene la lógica relacionada con atributos, tales como salud actual, salud máxima, daño.
-- Agregué 4 métodos nuevos:
-    - Movement();
-    - SetDirection(float dirValue, bool isX); En este caso, setDirection trabaja junto con el método Movement() para establecer la dirección hacia la cuál se mueve el personaje, dependiendo de los valores obtenidos de Input.GetAxis();
-    - TakeHeal(); Se implemento con la tecla espacio una pequeña curación de 10 puntos.
-    - TakeDamage(); Se implemento con la tecla alt izquierda una pequeña aplicación de daño por 5 puntos.
-    - Si el personaje tiene la salud al máximo, no podrá curarse, de igual modo, si tiene la salud agotada, no podrá seguir recibiendo daño.
+- Debido a que las variables no serán accedidas por ningún otro script, las cree privadas pero serializadas, de esta manera se pueden configurar en el editor, a excepción de las variables tipo GameObject
 
-- Se realiza el movimiento del objeto en cada frame, llamando al método Movement(), que recibe variables de entrada mediante Inputs de teclado, permitiendo establecer de manera dinámica la dirección del personaje (La primitiva en este caso)
+- Me gusta generar escenarios cada vez que puedo, en este caso, generé un escenario submarino y un prefab de submarino (creación propia), utilizando environments 
+de assetStore, le incluí música y efectos de partículas para simualar burbujas.
+
+- Preferí crear dos scripts diferentes para trabajar diferentes aspectos de la lógica
+    - BulletBehaviour.cs : Contiene la lógica de movimiento de la bala, dirección, velocidad, etc
+        - Se utilizo un prefab de misil descargado de la asset store
+        
+    - SpawnBehaviour.cs: Contiene la lógica relacionada con atributos, tales como salud actual, salud máxima, daño.
+        - Cree un punto de aparición dentro del prefab Submarino, que servirá de referencia para la salida de cada una de las balas. El script contiene la lógica
+        de instanciación de los prefab misiles
+
+- Los metodos agregados separados por script son: 
+    - BulletBehaviour.cs : 
+
+    ```c
+        private void MoveBullet(Vector3 vector3) Recibe una variable Vector3, no obstante, se controla con los enum direction, dependiendo de la selección en el editor
+        {
+        transform.position += bulletSpeed * Time.deltaTime * vector3;
+        }
+
+
+        public enum Direction
+        {
+            up,
+            down,
+            left,
+            right
+        }
+    ```
+
+    - SpawnBehaviour.cs: Se utiliza una variable GameObject llamada bulletPrefab para instancia las balas, en este caso, misiles o torpedos.
+        ```c
+        void Cannon()
+            {
+                Instantiate(bulletPrefab, transform.position, bulletPrefab.transform.rotation);
+            }   
+        ```
+- Se realiza el movimiento de las balas en cada frame, llamando al método MoveBullet() dependiendo de la dirección elegida.
 ## Autor
 
 - [@Josue Cea](https://www.github.com/Nifrith)
