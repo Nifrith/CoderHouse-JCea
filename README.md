@@ -25,7 +25,7 @@ de assetStore, le incluí música y efectos de partículas para simualar burbuja
     - BulletBehaviour.cs : 
 
     ```c
-        private void MoveBullet(Vector3 vector3) Recibe una variable Vector3, no obstante, se controla con los enum direction, dependiendo de la selección en el editor
+        private void MoveBullet(Vector3 vector3) /*Recibe una variable Vector3, no obstante, se controla con los enum direction, dependiendo de la selección en el editor*/
         {
         transform.position += bulletSpeed * Time.deltaTime * vector3;
         }
