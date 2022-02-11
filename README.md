@@ -1,4 +1,4 @@
-# Josue-Cea_Desafío 2 [![Unity](https://img.shields.io/badge/Unity-100000?style=for-the-badge&logo=unity&logoColor=white)](https://unity.com/es)
+# Josue-Cea_Desafío 3 [![Unity](https://img.shields.io/badge/Unity-100000?style=for-the-badge&logo=unity&logoColor=white)](https://unity.com/es)
 
 Tercera consigna curso coderhouse: Desarrollo de videojuegos, clase Modificación de GameObjects: Prefabs , Instanciación de balas
 
@@ -16,7 +16,7 @@ de assetStore, le incluí música y efectos de partículas para simualar burbuja
 - Preferí crear dos scripts diferentes para trabajar diferentes aspectos de la lógica
     - BulletBehaviour.cs : Contiene la lógica de movimiento de la bala, dirección, velocidad, etc
         - Se utilizo un prefab de misil descargado de la asset store
-        
+
     - SpawnBehaviour.cs: Contiene la lógica relacionada con atributos, tales como salud actual, salud máxima, daño.
         - Cree un punto de aparición dentro del prefab Submarino, que servirá de referencia para la salida de cada una de las balas. El script contiene la lógica
         de instanciación de los prefab misiles
