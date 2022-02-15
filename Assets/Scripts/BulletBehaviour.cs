@@ -1,3 +1,4 @@
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,6 +8,7 @@ public class BulletBehaviour : MonoBehaviour
      // Public variables from here
     [SerializeField] float damage;
     [SerializeField] float bulletSpeed;
+    [SerializeField] float impulse;
 
     // Direction should be: right, left, up , down , forward, back
     [SerializeField] Direction bulletDirection;
@@ -37,7 +39,8 @@ public class BulletBehaviour : MonoBehaviour
                 break;
         }
 
-         
+        impulse -= Time.deltaTime;
+        DestroyBullet(impulse); 
         
     }
 
@@ -45,6 +48,14 @@ public class BulletBehaviour : MonoBehaviour
     {
        transform.position += bulletSpeed * Time.deltaTime * vector3;
 
+    }
+
+     private void DestroyBullet(float impulse)
+    {   
+        if(impulse <= 0f){
+            Debug.Log("Bullet lost impulse");
+            Destroy(gameObject);
+        }   
     }
 
 

@@ -9,7 +9,8 @@ public class CharacterAttributesController : MonoBehaviour
 
     [SerializeField] private int health = 50; 
     [SerializeField] private int maxHealth = 100; 
-
+    [SerializeField] int damageQuantity;
+    [SerializeField] int healingQuantity;
     // Start is called before the first frame update
     void Start()
     {
@@ -21,17 +22,17 @@ public class CharacterAttributesController : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            TakeHeal(10);
+            TakeHeal(healingQuantity);
         }
 
         if (Input.GetKeyDown(KeyCode.LeftAlt))
         {
-            TakeDamage(5);
+            TakeDamage(damageQuantity);
         }
     }
 
     // Method for healing
-    void TakeHeal(int healing)
+    public void TakeHeal(int healing)
     {
         if ((healing + health) > maxHealth)
         {
@@ -48,7 +49,7 @@ public class CharacterAttributesController : MonoBehaviour
     }
 
     // Method for receiveing damage
-    void TakeDamage(int damage)
+    public void TakeDamage(int damage)
     {
         if (damage > health)
         {

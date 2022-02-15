@@ -130,6 +130,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 0
   bulletSpeed: 2
+  impulse: 2
   bulletDirection: 3
 --- !u!82 &1221564767414241942
 AudioSource:
@@ -5094,7 +5095,7 @@ ParticleSystem:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 176482}
   serializedVersion: 7
-  lengthInSec: 5
+  lengthInSec: 1
   simulationSpeed: 1
   stopAction: 0
   cullingMode: 3
@@ -5338,7 +5339,7 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0.09
+      scalar: 0.03
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -5654,7 +5655,7 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     randomizeRotationDirection: 0
-    maxNumParticles: 100000
+    maxNumParticles: 100
     size3D: 0
     rotation3D: 0
     gravityModifier:
