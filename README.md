@@ -11,6 +11,7 @@ Crear funcion que permita disparar: 2, 3 o 4 balas dependiendo de la tecla presi
 - Se agrega método para destruir las balas después de dos segundos, utilizando una lógica de impulso calculado con Time.deltaTime;
 
 - Se mantiene el escenario, la música, las texturas y sonidos
+- Se modificaron las partículas de fuego para que sean más coherentes con los disparos
 
 - Se modifico el método Cannon() de SpawnBehaviour, cambiandolo por ShootBullet, que recibe un parámetro de entrada tipo float para cálcular las instancias de gameObject tipo balas.
 
