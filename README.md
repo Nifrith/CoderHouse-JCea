@@ -1,53 +1,62 @@
-# Josue-Cea_Desafío 3 [![Unity](https://img.shields.io/badge/Unity-100000?style=for-the-badge&logo=unity&logoColor=white)](https://unity.com/es)
+# Josue-Cea_Desafío 3 - Complementario [![Unity](https://img.shields.io/badge/Unity-100000?style=for-the-badge&logo=unity&logoColor=white)](https://unity.com/es)
 
-Tercera consigna curso coderhouse: Desarrollo de videojuegos, clase Modificación de GameObjects: Prefabs , Instanciación de balas
+Tercera consigna . desafío complementario curso coderhouse: Desarrollo de videojuegos, clase Modificación de GameObjects: Prefabs , Instanciación de balas
 
 ## Consigna
 
-Crear prefab de bala con variables expuestas speed, direction y damage. La bala debe moverse en la dirección establecida en la variable direction, a la velocidad establecida en la variable speed.
-Se debe crear además un script Cannon() conteniendo el método Disparo, para así poder realizar el instanciamiento
+Crear funcion que permita disparar: 2, 3 o 4 balas dependiendo de la tecla presionada: J, K y L respectivamente.
+
 ## Desarrollo de actividad
 
-- Debido a que las variables no serán accedidas por ningún otro script, las cree privadas pero serializadas, de esta manera se pueden configurar en el editor, a excepción de las variables tipo GameObject
+- Se agrega método para destruir las balas después de dos segundos, utilizando una lógica de impulso calculado con Time.deltaTime;
 
-- Me gusta generar escenarios cada vez que puedo, en este caso, generé un escenario submarino y un prefab de submarino (creación propia), utilizando environments 
-de assetStore, le incluí música y efectos de partículas para simualar burbujas.
+- Se mantiene el escenario, la música, las texturas y sonidos
 
-- Preferí crear dos scripts diferentes para trabajar diferentes aspectos de la lógica
-    - BulletBehaviour.cs : Contiene la lógica de movimiento de la bala, dirección, velocidad, etc
-        - Se utilizo un prefab de misil descargado de la asset store
-
-    - SpawnBehaviour.cs: Contiene la lógica relacionada con atributos, tales como salud actual, salud máxima, daño.
-        - Cree un punto de aparición dentro del prefab Submarino, que servirá de referencia para la salida de cada una de las balas. El script contiene la lógica
-        de instanciación de los prefab misiles
+- Se modifico el método Cannon() de SpawnBehaviour, cambiandolo por ShootBullet, que recibe un parámetro de entrada tipo float para cálcular las instancias de gameObject tipo balas.
 
 - Los metodos agregados separados por script son: 
     - BulletBehaviour.cs : 
 
     ```c
-        private void MoveBullet(Vector3 vector3) /*Recibe una variable Vector3, no obstante, se controla con los enum direction, dependiendo de la selección en el editor*/
-        {
-        transform.position += bulletSpeed * Time.deltaTime * vector3;
-        }
+            impulse -= Time.deltaTime;
 
 
-        public enum Direction
-        {
-            up,
-            down,
-            left,
-            right
-        }
+            private void DestroyBullet(float impulse)
+                {   
+                if(impulse <= 0f){
+                    Debug.Log("Bullet lost impulse");
+                    Destroy(gameObject);
+                }   
+            }
+
     ```
 
-    - SpawnBehaviour.cs: Se utiliza una variable GameObject llamada bulletPrefab para instancia las balas, en este caso, misiles o torpedos.
+    - SpawnBehaviour.cs: Se añadieron variables señaladas con barrel (El barril es la zona donde se introduce la bala en un arma) en este caso, misiles o torpedos.
         ```c
-        void Cannon()
-            {
-                Instantiate(bulletPrefab, transform.position, bulletPrefab.transform.rotation);
-            }   
+
+            // Variables públicas para ser modificadas dependiendo de lo que pase en el juego (powerups, aumento de balas, etc)
+
+            public float barrelOne;
+            public float barrelTwo;
+            public float barrelThree;
+            public float barrelFour;
+
+
+             // Se controla también la distancia de aparición entre misiles, para que no aparezcan superpuestos
+            void ShootMissile(int bulletAmmount)
+            {    
+                float posX = transform.position.x;
+                for (int i = 1; i <= bulletAmmount; i++)
+                {   
+                    Debug.Log(i);
+                     Instantiate(bulletPrefab, new Vector3(posX, transform.position.y,transform.position.z), bulletPrefab.transform.rotation);
+                     posX += -0.3f;
+                }
+               
+            }
+
         ```
-- Se realiza el movimiento de las balas en cada frame, llamando al método MoveBullet() dependiendo de la dirección elegida.
+- Se modificaron también los métodos de takeHeal y takeDamage, en caso de que se requieran utilizar por mecánicas del juego.
 ## Autor
 
 - [@Josue Cea](https://www.github.com/Nifrith)
