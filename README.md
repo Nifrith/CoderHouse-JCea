@@ -1,10 +1,11 @@
-# Josue-Cea_Desafío 3 - Complementario [![Unity](https://img.shields.io/badge/Unity-100000?style=for-the-badge&logo=unity&logoColor=white)](https://unity.com/es)
+# Josue-Cea_Desafío 4 - Disparos Temporizados [![Unity](https://img.shields.io/badge/Unity-100000?style=for-the-badge&logo=unity&logoColor=white)](https://unity.com/es)
 
-Tercera consigna . desafío complementario curso coderhouse: Desarrollo de videojuegos, clase Modificación de GameObjects: Prefabs , Instanciación de balas
+Cuarta consigna . desafío complementario curso coderhouse: Desarrollo de videojuegos, clase Inputs y flow temporal , Instanciación de balas
 
 ## Consigna
 
-Crear funcion que permita disparar: 2, 3 o 4 balas dependiendo de la tecla presionada: J, K y L respectivamente.
+Crear un objeto que instancie balas cada cierto tiempo, las cuales deben destruirse después de un tiempo determinado (ajustable por inspector) y si pulsamos la barra espaciadora
+dupliquen su tamaño.
 
 ## Desarrollo de actividad
 
@@ -13,7 +14,7 @@ Crear funcion que permita disparar: 2, 3 o 4 balas dependiendo de la tecla presi
 - Se mantiene el escenario, la música, las texturas y sonidos
 - Se modificaron las partículas de fuego para que sean más coherentes con los disparos
 
-- Se modifico el método Cannon() de SpawnBehaviour, cambiandolo por ShootBullet, que recibe un parámetro de entrada tipo float para cálcular las instancias de gameObject tipo balas.
+- Se creo un método adicional en SpawnBehaviour.cs llamado ShootRepeating para utilizar con el método invokeRepeating. Dicho método es utilizado usando parámetros de entrada para el delay de inicio y las repeticiones 
 
 - Los metodos agregados separados por script son: 
     - BulletBehaviour.cs : 
@@ -22,39 +23,31 @@ Crear funcion que permita disparar: 2, 3 o 4 balas dependiendo de la tecla presi
             impulse -= Time.deltaTime;
 
 
-            private void DestroyBullet(float impulse)
-                {   
-                if(impulse <= 0f){
-                    Debug.Log("Bullet lost impulse");
-                    Destroy(gameObject);
-                }   
-            }
+             void BulletGrow(float growth)
+            {
+                if (Input.GetKeyDown(KeyCode.Space))
+                {
+                    transform.localScale = transform.localScale * growth;
+                    Debug.Log(transform.localScale);
+
+                }
+            }  
 
     ```
 
     - SpawnBehaviour.cs: Se añadieron variables señaladas con barrel (El barril es la zona donde se introduce la bala en un arma) en este caso, misiles o torpedos.
         ```c
 
-            // Variables públicas para ser modificadas dependiendo de lo que pase en el juego (powerups, aumento de balas, etc)
-
-            public float barrelOne;
-            public float barrelTwo;
-            public float barrelThree;
-            public float barrelFour;
-
-
-             // Se controla también la distancia de aparición entre misiles, para que no aparezcan superpuestos
-            void ShootMissile(int bulletAmmount)
-            {    
-                float posX = transform.position.x;
-                for (int i = 1; i <= bulletAmmount; i++)
-                {   
-                    Debug.Log(i);
-                     Instantiate(bulletPrefab, new Vector3(posX, transform.position.y,transform.position.z), bulletPrefab.transform.rotation);
-                     posX += -0.3f;
-                }
-               
+            void Start()
+            {
+                InvokeRepeating("ShootRepeating", spawnInterval, spawnDelay);
             }
+
+            void ShootRepeating()
+            {
+            Instantiate(bulletPrefab, transform.position, bulletPrefab.transform.rotation);
+            }
+
 
         ```
 - Se modificaron también los métodos de takeHeal y takeDamage, en caso de que se requieran utilizar por mecánicas del juego.

@@ -8,6 +8,9 @@ public class SpawnBehaviour : MonoBehaviour
     // Start is called before the first frame update
      // public variables here
     [SerializeField] GameObject bulletPrefab;
+    
+    [SerializeField] float spawnDelay = 1.0f;
+    [SerializeField] float spawnInterval = 1.0f;
 
     public int barrelOne = 1;
     public int barrelTwo = 2;
@@ -16,27 +19,13 @@ public class SpawnBehaviour : MonoBehaviour
 
     void Start()
     {
-        
+         InvokeRepeating("ShootRepeating", spawnInterval, spawnDelay);
     }
 
     // Update is called once per frame
     void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Space)){
-             ShootMissile(barrelOne);
-         }
-        
-        if (Input.GetKeyDown(KeyCode.J)){
-             ShootMissile(barrelTwo);
-         }
-
-        if (Input.GetKeyDown(KeyCode.K)){
-             ShootMissile(barrelThree);
-         }
-
-        if (Input.GetKeyDown(KeyCode.L)){
-             ShootMissile(barrelFour);
-         }
+    {   
+       
     }
 
      void ShootMissile(int bulletAmmount)
@@ -50,4 +39,11 @@ public class SpawnBehaviour : MonoBehaviour
         }
        
     }
+
+
+    void ShootRepeating()
+    {
+       Instantiate(bulletPrefab, transform.position, bulletPrefab.transform.rotation);
+    }
+
 }

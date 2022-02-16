@@ -10,6 +10,9 @@ public class BulletBehaviour : MonoBehaviour
     [SerializeField] float bulletSpeed;
     [SerializeField] float impulse;
 
+    // Scale bullet
+    public float growth = 2; 
+
     // Direction should be: right, left, up , down , forward, back
     [SerializeField] Direction bulletDirection;
 
@@ -42,6 +45,8 @@ public class BulletBehaviour : MonoBehaviour
         impulse -= Time.deltaTime;
         DestroyBullet(impulse); 
         
+        // Method to duplicate bulletScale
+        BulletGrow(growth);
     }
 
     private void MoveBullet(Vector3 vector3)
@@ -66,4 +71,15 @@ public class BulletBehaviour : MonoBehaviour
         left,
         right
     }
+
+    void BulletGrow(float growth)
+    {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            transform.localScale = transform.localScale * growth;
+            Debug.Log(transform.localScale);
+
+        }
+    }    
+    
 }
