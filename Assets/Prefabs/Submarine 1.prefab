@@ -744,10 +744,8 @@ MonoBehaviour:
   bulletPrefab: {fileID: 162538, guid: 8360bcdf5f97bdc44ae3e39b8aca3404, type: 3}
   spawnDelay: 1
   spawnInterval: 1
+  cooldown: 0.3
   barrelOne: 1
-  barrelTwo: 2
-  barrelThree: 3
-  barrelFour: 4
 --- !u!1 &3140810713650492768
 GameObject:
   m_ObjectHideFlags: 0
@@ -1364,7 +1362,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4406882645456229178}
   - component: {fileID: 3725803920715699314}
-  - component: {fileID: 3725803920715699312}
   - component: {fileID: 3725803920715699315}
   m_Layer: 0
   m_Name: Submarine 1
@@ -1499,19 +1496,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &3725803920715699312
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4406882645456229179}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 653f242bfce8e27a68a595aba14197a8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  moveSpeed: 1
 --- !u!114 &3725803920715699315
 MonoBehaviour:
   m_ObjectHideFlags: 0
